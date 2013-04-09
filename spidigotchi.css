@@ -1,0 +1,26 @@
+.preload {
+  display: none;
+}
+body {
+  margin-top: 100px;
+}
+p {
+  text-align: center;
+  margin: 0;
+}
+.button {
+  display: none;
+  cursor: pointer;
+}
+.button:hover {
+  background: #f26d50;
+  border-radius: 10px;
+}
+.button:active {
+  background: none;
+  border-radius: 10px;
+}
+#tip {
+  font-size: 30pt;
+  font-family: 'Patrick Hand SC', sans-serif;
+}
