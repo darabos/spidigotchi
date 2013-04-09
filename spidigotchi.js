@@ -1,12 +1,30 @@
-$(window).load(function() {
+$(function() {
   var guy = $('#guy');
+  var ctx = guy[0].getContext('2d');
+  var images = ['Batman.png', 'Change.png', 'Civilian.png', 'Dizzy.png', 'Egg1.png', 'Egg2.png', 'Egg3.png', 'Fight1.png', 'Fight2.png', 'Happy1.png', 'Happy2.png', 'Hulk.png', 'Idle1.png', 'Idle2.png', 'Idle3.png', 'Sad.png'];
+  var image_count = images.length;
+  var loaded_count = 0;
+  for (var i = 0; i < image_count; ++i) {
+    var image = new Image();
+    image.onload = function() {
+      ++loaded_count;
+      if (loaded_count == image_count) {
+        egg();
+        queueIdle();
+      }
+    }
+    image.src = images[i];
+    images[images[i]] = image;
+  }
   function queue(image, delay) {
     guy.queue(function() {
-      $(this).attr('src', image);
+      ctx.clearRect(0, 0, 100, 100);
+      ctx.drawImage(images[image], 0, 0);
       $(this).dequeue();
     }).delay(delay);
   }
   function egg() {
+    queue('Egg1.png', 2000);
     queue('Egg2.png', 600);
     queue('Egg1.png', 600);
     queue('Egg2.png', 600);
@@ -18,6 +36,7 @@ $(window).load(function() {
     queue('Egg2.png', 600);
     queue('Egg1.png', 600);
     queue('Egg3.png', 600);
+    queue('Change.png', 600);
     queue('Happy1.png', 600);
     queue('Happy2.png', 1200);
   }
@@ -56,8 +75,6 @@ $(window).load(function() {
       $(this).dequeue();
     });
   }
-  egg();
-  queueIdle();
   $('#nemesis').mouseover(function() { $('#tip').stop().text('Mention Nemesis'); });
   $('#sidekick').mouseover(function() { $('#tip').stop().text('Kidnap Sidekick'); });
   $('#kryptonite').mouseover(function() { $('#tip').stop().text('Kryptonite Beam'); });

@@ -24,3 +24,11 @@ p {
   font-size: 30pt;
   font-family: 'Patrick Hand SC', sans-serif;
 }
+#footer {
+  font-size: 10pt;
+  font-family: 'Patrick Hand SC', sans-serif;
+  position: absolute;
+  bottom: 100px;
+  right: 100px;
+  text-align: right;
+}
