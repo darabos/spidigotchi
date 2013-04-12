@@ -75,26 +75,31 @@ $(function() {
       $(this).dequeue();
     });
   }
+  function onClick(id, callback) {
+    $(id).click(function(){
+      $('#tip').stop().text('');
+      $('.button').mouseout().hide();
+      callback();
+      queueIdle();
+    });
+  }
   $('#nemesis').mouseover(function() { $('#tip').stop().text('Mention Nemesis'); });
   $('#sidekick').mouseover(function() { $('#tip').stop().text('Kidnap Sidekick'); });
   $('#kryptonite').mouseover(function() { $('#tip').stop().text('Kryptonite Beam'); });
   $('#mask').mouseover(function() { $('#tip').stop().text('Secret Identity'); });
   $('#bat').mouseover(function() { $('#tip').stop().text('Put In Bat Cave'); });
   $('.button').mouseout(function() { $('#tip').delay(100).queue(function() { $(this).text('').dequeue(); }); });
-  $('#nemesis').click(function() {
-    $('.button').mouseout().hide();
+  onClick('#nemesis', function() {
     queue('Fight1.png', 1000);
     queue('Fight2.png', 1000);
     queue('Fight1.png', 1000);
     queue('Fight2.png', 2000);
     queue('Idle1.png', 1000);
     queue('Fight2.png', 2000);
-    queueIdle();
   });
   var masks = ['Civilian.png', 'Hulk.png', 'Batman.png'];
   var mask = 0;
-  $('#mask').click(function() {
-    $('.button').mouseout().hide();
+  onClick('#mask',function() {
     queue('Happy1.png', 500);
     queue('Happy2.png', 500);
     queue('Change.png', 500);
@@ -102,21 +107,16 @@ $(function() {
     mask = (mask + 1) % masks.length;
     queue('Change.png', 500);
     queue('Happy2.png', 500);
-    queueIdle();
   });
-  $('#sidekick').click(function() {
-    $('.button').mouseout().hide();
+  onClick('#sidekick', function() {
     queue('Sad.png', 3000);
-    queueIdle();
   });
-  $('#kryptonite').click(function() {
-    $('.button').mouseout().hide();
+  onClick('#kryptonite', function() {
     queue('Change.png', 500);
     queue('Dizzy.png', 3000);
     queue('Change.png', 500);
-    queueIdle();
   });
-  $('#bat').click(function() {
+  onClick('#bat', function() {
     $('.button').mouseout().hide();
     queue('Fight1.png', 400);
     queue('Fight2.png', 400);
@@ -128,6 +128,5 @@ $(function() {
     queue('Fight2.png', 300);
     queue('Fight1.png', 300);
     queue('Sad.png', 1500);
-    queueIdle();
   });
 });
